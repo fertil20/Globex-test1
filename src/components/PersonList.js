@@ -9,11 +9,15 @@ import {
     Col, Modal, ModalBody, ModalFooter, ModalHeader,
     Row
 } from 'reactstrap';
-import Spinner from 'react-bootstrap/Spinner';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import {
+    Spinner,
+    Button,
+    Form
+} from "react-bootstrap";
 import NotFound from "../common/NotFound";
 import ServerError from "../common/ServerError";
+import phone from "../img/phone.png"
+import mail from "../img/mail.png"
 
 
 export class PersonList extends Component{
@@ -136,19 +140,10 @@ export class PersonList extends Component{
                                 this.handleInputChange(event)
                             }}/>
                             <Button variant="primary" type="submit">
+                                {/*<img src={search} width={25} height={25} alt='Search' className='search-image'/>*/}
                                 Button
                             </Button>
                         </Form>
-                        <Col style={{
-                            backgroundColor: 'white',
-                            borderRadius: 0,
-                            overflow: 'auto',
-                            height: '100%',
-                            paddingBottom: 0,
-                            width: '10%'
-                        }}>
-                            {/*<img src={search} width={25} height={25} alt='Search' className='search-image'/>*/}
-                        </Col>
                     </Row>
                     <div className="card-grid">
                         {
@@ -156,13 +151,24 @@ export class PersonList extends Component{
                                 user =>
                                     <Card className="card" id={user}
                                           onClick={event => this.toggle(event.currentTarget.id)}>
-                                        <CardHeader>
-                                            {this.state.user[user].name}
+                                        <CardHeader style={{
+                                            marginLeft: "15px",
+                                            marginTop: "25px",
+                                            marginBottom: "30px",
+                                            fontSize: "18px"
+                                        }}>
+                                            <b>{this.state.user[user].name}</b>
                                         </CardHeader>
                                         <CardBody className="card-body">
-                                            <Row>{this.state.user[user].phone}</Row>
+                                            <Row style={{marginBottom: "15px", display: "flex"}}>
+                                                <img style={{marginRight: "8px", height: "100%"}} src={phone} alt='Phone'/>
+                                                <p style={{margin: 0}}>{this.state.user[user].phone}</p>
+                                            </Row>
                                             <Row
-                                                style={{textDecorationLine: "underline"}}>{this.state.user[user].email}</Row>
+                                                style={{textDecorationLine: "underline", display: "flex"}}>
+                                                <img style={{marginRight: "8px", height: "100%", width: "20px"}} src={mail} alt='Email'/>
+                                                <p style={{margin: 0}}>{this.state.user[user].email}</p>
+                                            </Row>
                                         </CardBody>
                                         <CardFooter>
 
@@ -172,13 +178,60 @@ export class PersonList extends Component{
                         }
                     </div>
                     <Modal isOpen={this.state.toggle} toggle={this.toggle}>
-                        <Button color="primary" onClick={this.toggle}>Cancel</Button>
-                        <ModalHeader>{typeof this.state.user[this.state.card] !== 'undefined' && this.state.user[this.state.card].name}</ModalHeader>
+                        <Row style={{textAlign: "center", height: "20px"}}>
+                            <Button className="dot" type="reset" variant="primary" onClick={this.toggle}></Button>
+                        </Row>
+                        <ModalHeader style={{
+                            fontSize: "24px",
+                            marginLeft: "10px"
+                        }}>{typeof this.state.user[this.state.card] !== 'undefined' && this.state.user[this.state.card].name}</ModalHeader>
                         <ModalBody>
-
+                            <Row className="modal-row">
+                                <Col style={{width: "50%"}}>
+                                    <p className="person-info">Телефон:</p>
+                                </Col>
+                                <Col style={{width: "50%"}}>
+                                    <p className="person-info-data" style={{textDecorationLine: "underline"}}>{typeof this.state.user[this.state.card] !== 'undefined' && this.state.user[this.state.card].phone}</p>
+                                </Col>
+                            </Row>
+                            <Row className="modal-row">
+                                <Col style={{width: "50%"}}>
+                                    <p className="person-info">Почта:</p>
+                                </Col>
+                                <Col style={{width: "50%"}}>
+                                    <p className="person-info-data" style={{textDecorationLine: "underline"}}>{typeof this.state.user[this.state.card] !== 'undefined' && this.state.user[this.state.card].email}</p>
+                                </Col>
+                            </Row>
+                            <Row className="modal-row">
+                                <Col style={{width: "50%"}}>
+                                    <p className="person-info">Дата приема:</p>
+                                </Col>
+                                <Col style={{width: "50%"}}>
+                                    <p className="person-info-data">{typeof this.state.user[this.state.card] !== 'undefined' && this.state.user[this.state.card].hire_date}</p>
+                                </Col>
+                            </Row>
+                            <Row className="modal-row">
+                                <Col style={{width: "50%"}}>
+                                    <p className="person-info">Должность:</p>
+                                </Col>
+                                <Col style={{width: "50%"}}>
+                                    <p className="person-info-data">{typeof this.state.user[this.state.card] !== 'undefined' && this.state.user[this.state.card].position_name}</p>
+                                </Col>
+                            </Row>
+                            <Row className="modal-row">
+                                <Col style={{width: "50%"}}>
+                                    <p className="person-info">Подразделение:</p>
+                                </Col>
+                                <Col style={{width: "50%"}}>
+                                    <p className="person-info-data">{typeof this.state.user[this.state.card] !== 'undefined' && this.state.user[this.state.card].department}</p>
+                                </Col>
+                            </Row>
                         </ModalBody>
-                        <ModalFooter>
-                            Дополнительная информация
+                        <ModalFooter style={{justifyContent: "flex-start", marginLeft: "10px"}}>
+                            <Col>
+                            <p style={{marginTop: "0px"}}>Дополнительная информация:</p>
+                            <p style={{marginBottom: "10px"}} className="person-info-data">Разработчики используют текст Lorem ipsum в качестве заполнителя макета страницы. Так как дополнительной информации в JSON нет, а адрес нигде не используется закинул его сюда: {typeof this.state.user[this.state.card] !== 'undefined' && this.state.user[this.state.card].address}</p>
+                            </Col>
                         </ModalFooter>
                     </Modal>
                 </Col>
