@@ -45,10 +45,31 @@
     bottom: 17px;
     position: relative;
 }
-
 .dot:after {
     font-size: 20px;
-    content: "\D7"; /* use the hex value here... */
+    content: "\D7";
     color: #FFF;
     text-align: center;
+}
+
+.search-bar {
+    display: flex;
+    flex-direction: row;
+    padding-left: 15px;
+    border-radius: 42px;
+    border: 1px solid #d5d5d5;
+    height: 40px;
+    outline: none;
+    position: relative;
+    transition: .3s linear;
+    margin-bottom: 30px;
+    margin-top: 40px;
+/*    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);*/
+}
+
+.search-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 60px;
 }

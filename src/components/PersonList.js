@@ -18,6 +18,7 @@ import NotFound from "../common/NotFound";
 import ServerError from "../common/ServerError";
 import phone from "../img/phone.png"
 import mail from "../img/mail.png"
+import search from "../img/search.png"
 
 
 export class PersonList extends Component{
@@ -134,14 +135,16 @@ export class PersonList extends Component{
         return (
             this.state.user ? (
                 <Col>
-                    <Row style={{width: 'auto', marginRight: '0%', marginLeft: '0%'}}>
+                    <Row>
                         <Form className="search-bar" onSubmit={this.refreshUsers}>
-                            <Form.Control onChange={(event) => {
+                            <Form.Control style={{width: "100%",
+                                border: "none",
+                                outline: "none",
+                                background: "transparent"}} onChange={(event) => {
                                 this.handleInputChange(event)
                             }}/>
-                            <Button variant="primary" type="submit">
-                                {/*<img src={search} width={25} height={25} alt='Search' className='search-image'/>*/}
-                                Button
+                            <Button className="search-button" variant="primary" type="submit">
+                                <img src={search} height={26} alt='Search'/>
                             </Button>
                         </Form>
                     </Row>
